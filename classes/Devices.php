@@ -21,8 +21,10 @@ class Devices {
     protected $availableMethods = [];
 
 
-    public function __construct(){
+    public function __construct( $params = array() )
+    {
 
+        
     }
 
 
