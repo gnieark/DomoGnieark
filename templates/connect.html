@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>{{headTitle}}</title>
+        <link rel="stylesheet" type="text/css" href="css/logon.css" media="all"/>
+    </head>
+
+    <body>
+        <header>
+            <h1>Domo Gnieark</h1>
+            <p>Gestion de la domotique par Gnieark</p>
+        </header>
+        <nav></nav>
+        <section>
+            
+            <article class="loginbox" id="localloginbox">
+            <form method="POST" action="/index.php">
+                <input type="text" name="login" placeholder="identifiant"/>
+                <input type="password" name="password" placeholder="mot de passe"/>
+                <input type="hidden" name="act" value="auth"/>
+                <input type="submit" value="Se connecter"/>
+            </form>
+            </article>
+
+
+        <hr/>
+            <article>
+                {{description_on_login_page_html}}
+            </article>
+        </section>
+
+        <footer>
+            <p>By <a href="https://blog-du-grouik.tinad.fr/">Gnieark</a>&nbsp;<a href="https://github.com/gnieark/DomoGnieark">Source Code</a></p>
+        </footer>
+    </body>
+
+</html>
