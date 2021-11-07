@@ -33,11 +33,6 @@ try {
 if(isset($_GET["menu"]) && $_GET["menu"] == "logout"){
 
     unset($_SESSION["user"]);
-
-    if(Config::get_option_value("CAS","active",true)){
-        User_CAS::logout();
-    }
-
     header('Location: /'); 
     die();
 }

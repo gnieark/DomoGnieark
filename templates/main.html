@@ -1,1 +1,29 @@
-<h1>Hey!</h1>
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title>{{headTitle}}</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css" media="all"/>
+        {{customJS}}
+        {{customCSS}}
+    </head>
+    <body>
+        <header>
+                <p class="structure">{{structure_name_with_br}}</p>
+                <h1>{{headerTitle}}</h1>
+                <p class="userMenu">{{userDisplayName}} <a href="index.php?menu=logout">Déconnexion</a></p>
+        </header>
+        <nav>
+            <ul>
+                <!-- BEGIN navmenus -->
+                <li><a href="{{navmenus.url}}">{{navmenus.caption}}</a></li>
+                <!-- END navmenus -->
+            </ul>
+        </nav>
+        <section>
+            {{content}}
+        </section>
+        <footer>
+        </footer>
+    </body>
+{{after_body_tag}}
+</html>

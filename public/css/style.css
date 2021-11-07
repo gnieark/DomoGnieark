@@ -1,0 +1,247 @@
+/* GRID the page */
+html{
+    color: #333;
+  }
+  body{
+    display: grid;
+    
+    grid-template-areas: "head head head"
+                        "nav  main main"
+                        "foot  foot foot";
+    grid-template-columns: 1fr 6fr 1fr;
+  }
+  header {
+    padding: 0 1em;
+    grid-area: head;
+    background-color: #95A5A6;
+    display:grid;
+    grid-template-areas: "structure title headerinfo";
+    grid-template-columns: 2fr 4fr 2fr;
+  }
+  nav {
+    grid-area: nav;
+    margin-right: 1em;
+  }
+  section {
+    grid-area: main;
+  }
+  
+  footer {
+    grid-area: foot;
+  }
+  
+  /* END OF GRIDing*/
+  
+  header{
+    margin-bottom: 1em;
+  }
+  
+  header h1{
+    grid-area: title;
+    text-align: center;
+    font-size: 150%;
+  }
+  
+  header .userMenu{
+    grid-area: headerinfo;
+    font-size:1em;
+    text-align: right;
+  }
+  header .structure{
+    grid-area: structure;
+    font-size:1em;
+    text-align: left;
+  }
+  nav ul {
+    list-style:none;
+    margin-left:0;
+    padding-left:0;
+    }
+  nav ul li {
+    margin-bottom:1em;
+    width: 100%;
+  }
+  
+  nav ul li a{
+    text-decoration: none;
+    width: 100%;
+    display: block;
+    padding-right: 1em;
+    text-align: center;
+  }
+  
+  nav ul li a:hover{
+    background-color: #D4CFFF;
+    
+  }
+  footer{
+    font-size: 80%;
+    text-align: center;
+  }
+  
+  
+  
+  /* formulaires */
+  input[type=text],  input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .forceCaps{
+      text-transform: uppercase; 
+  }
+  input[type=submit],button {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  input[type=submit].little,input[type="text"].little,button.little,select.little{
+    width:5em;
+    height:auto;
+    font-size: 80%;
+    padding: 1px 1px;
+    margin: 1px 0;
+    border-radius: 2px;
+  }
+  input[type="checkbox"] {
+    margin: 8px 0;
+  }
+  select.little{
+    height:2em;
+  
+  }
+  #show, #hide, #showForm, #hideForm{
+    width: auto;
+  }
+  input[type=submit]:hover , button::hover {
+    background-color: #45a049;
+  }
+  
+  select{
+    -ms-box-sizing:content-box;
+    -moz-box-sizing:content-box;
+    -webkit-box-sizing:content-box; 
+    box-sizing:content-box;
+    height: 34px;
+  }
+  
+  
+  /* fieldset */
+  fieldset p{ width: 100%; display: table;}
+  
+  fieldset p label
+  {
+    text-align: right;
+    width: 20%;
+    display: table-cell;
+    padding-right: 5px;
+  }
+  fieldset p input[type="text"],fieldset p input[type="submit"], .ui-datepicker {
+  
+    width: 79%;
+    display: table-cell;
+  }
+  
+  
+  .lineFilter{
+    display: grid;
+    grid-template-areas: "label comparator input";
+    grid-template-columns: 1fr 1fr 4fr;
+    grid-gap: 1em;
+    align-items: center;
+  }
+  .lineFilterList{
+    display: grid;
+    grid-template-areas: "label select";
+    grid-template-columns: 1fr 5fr;
+    grid-gap: 1em;
+    align-items: center;
+  }
+  
+  .lineFilter em, .lineFilterList em {grid-area: label;}
+  .lineFilter select {grid-area: comparator; width: auto; height: 3em;}
+  .lineFilter input {grid-area: input;height: 3em;}
+  .lineFilterList select {grid-area: select; width: auto; height: 12em;}
+  
+  
+  .infobulle {
+    position: relative;  /* les .infobulle deviennent référents */
+    cursor: help;
+  }
+  
+  /* on génère un élément :after lors du survol et du focus :*/
+  
+  .infobulle:hover::after,
+  .infobulle:focus::after {
+    content: attr(aria-label);  /* on affiche aria-label */
+    position:absolute;
+    display: block;
+    font-size: 80%;
+    background-color: #ffff;
+    width: 250px;
+    z-index: 4; /* pour s'afficher au dessus des éléments en position relative */
+   
+  }
+  
+  .infobulle img, .buttonimg {
+    width: 15px;
+    height: 15px;
+  }
+  
+  #tableData tr td {text-align: center;}
+  .clickable {cursor: pointer;}
+  
+  .navOnRows{
+    font-size: 80%;
+  }
+  .thinLink{
+    cursor: pointer;
+    font-size: 80%;
+  }
+  
+  .clickable:hover{
+    background-color: #95A5A6;
+  }
+  
+  table thead{
+    background-color: #95A5A6;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-radius: 3px;
+    display: block;
+    table-layout:fixed;
+  }
+  table thead, tbody tr{
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  
+  table tbody{
+      display:block;
+      height:20em; /* 5 times the equivalent of a text "size". */
+      overflow-y:scroll;
+  }
+  
+  
+  table thead tr th{ font-weight: normal;}
+  
+  
+  .overBody{
+    z-index:99999;
+    grid-area: main;
+    background-color: white;
+  }
+  
