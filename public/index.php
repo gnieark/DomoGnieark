@@ -7,6 +7,7 @@ spl_autoload_register(function ($class_name) {
                             ,"../classes/Template/"
                             ,"../classes/Routes/"
                             ,"../classes/Menus/"
+                            ,"../classes/User/"
                             );
     foreach($classFolders as $folder)
     {
