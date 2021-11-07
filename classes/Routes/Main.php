@@ -1,5 +1,5 @@
 <?php
-Class Main extends Routes
+Class Main extends Route
 {
     protected static $displayOnPage = true;
 
