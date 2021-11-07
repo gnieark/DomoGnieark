@@ -60,9 +60,9 @@ if($currentUser->is_connected() === false)
     $tpl = new TplBlock();
     $tpl->addVars(
         array(
-                "headTitle"                 => "Connectez-vous.", 
-                "structure_name_with_br"    => Config::get_option_value("STRUCTURE","entreprise_name_with_br",true),
-                "description_on_login_page_html" => Config::get_option_value("STRUCTURE","description_on_login_page_html",true)
+                "InstanceTitle"             => Config::get_option_value("About","InstanceTitle",true),
+                "structure_name_with_br"    => Config::get_option_value("About","entreprise_name_with_br",true),
+                "description_on_login_page_html" => Config::get_option_value("About","description_on_login_page_html",true)
         )
     );
     if(file_exists("../templates/connect.custom.html")){
@@ -98,8 +98,8 @@ if(!$currentMenu->display_on_page())
 $tpl = new TplBlock();
 $tpl->addVars(
     array(
-        "headTitle" => $currentMenu->get_name() . " - Exports archives départementales",
-        "structure_name_with_br"    => Config::get_option_value("STRUCTURE","entreprise_name_with_br",true),
+        "headTitle" => $currentMenu->get_name() . " - DomoGnieark",
+        "structure_name_with_br"    => Config::get_option_value("About","entreprise_name_with_br",true),
         "userDisplayName"   => $currentUser->get_display_name(),
         "headerTitle" => $currentMenu->get_name(),
         "customJS"  => $currentMenu->get_custom_js($db,$currentUser),

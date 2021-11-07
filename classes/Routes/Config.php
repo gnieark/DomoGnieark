@@ -5,7 +5,6 @@ class Config extends Route{
     private static $optionsValues = array();
 
     private static $configs = array(
-    
         "LDAP"  => array(
             "file"  =>    "../config/ldap.json",
             "fields"    => array(
@@ -45,7 +44,7 @@ class Config extends Route{
                 )
             )
         ),
-        "SYSTEM"    => array(
+        "Email"    => array(
             "file"  =>    "../config/system.json",
             "fields"    => array(
                 "base_url" => array(
@@ -86,9 +85,13 @@ class Config extends Route{
                 )
             )
         ),
-        "STRUCTURE"  => array(
-            "file"  => "../config/structure.json",
+        "About"  => array(
+            "file"  => "../config/about.json",
             "fields"    => array(
+                "InstanceTitle"     => array(
+                    "type"  => "string",
+                    "constraints"   => array()
+                ),
                 "entreprise_name"   => array(
                     "type"  => "string",
                     "constraints"   => array()
@@ -111,7 +114,7 @@ class Config extends Route{
     static public function load_values($group){
         if(!isset(self::$configs[$group]["file"]))
         {
-            throw new \UnexpectedValueException( $group . "file setting not found");
+            throw new \UnexpectedValueException( $group . " file setting not found");
         }
         if(!file_exists(self::$configs[$group]["file"])){
 
@@ -250,18 +253,13 @@ class Config extends Route{
 
     }
     static public function get_content_html(PDO $db, User $user)
-    {
-        //default value
-        if(empty( self::get_option_value("ENV","BACKGROUND_PHP_TASKS_HOME_DIRECTORY")  )){
-            self::set_option_value("ENV","BACKGROUND_PHP_TASKS_HOME_DIRECTORY", getenv("HOME") . "/.BackgroundPHPtasks/");
-        }
-
+    {  
         $tpl = new TplBlock();
         $tpl->addVars(array(
-            "gargantuaInputs"       => self::generateForm('Gargantua'),
-            "SEDAInputs"            => self::generateForm('exports'),
-            "envInputs"             => self::generateForm('ENV'),
-            "submitButton"          => '<input type="submit" value="sauvegarder"/>'
+            "EmailInputs"       => self::generateForm('Email'),
+            "AboutInputs"       => self::generateForm('About'),
+            "LDAPInputs"        => self::generateForm('LDAP'),
+            "submitButton"      => '<input type="submit" value="Sauvegarder"/>'
 
         ));
 
