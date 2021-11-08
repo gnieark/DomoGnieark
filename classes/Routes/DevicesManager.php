@@ -6,11 +6,14 @@ class DevicesManager extends Route{
     {
         $tpl = new TplBlock();
 
+        $devicesSRC = yaml_parse( file_get_contents("../src/Devices.yml") );
+        var_dump($devicesSRC);
+
 
 
         return $tpl->applyTplFile("../templates/DevicesManager.html");
     }
-    
+
     static public function get_custom_js()
     {
         return file_get_contents("../templates/DevicesManager.js");
