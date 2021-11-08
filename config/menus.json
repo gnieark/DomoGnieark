@@ -13,6 +13,12 @@
         "CRUDclass": "Main",
         "default_one_if_get_empty" : true
     },
+    "DevicesManager":{
+        "name": "Devices Manager",
+        "default_level_needed": "user",
+        "display_on_nav": true,
+        "CRUDclass": "DevicesManager"
+    },
     "config": {
         "name": "Configuration",
         "default_level_needed": "user",
