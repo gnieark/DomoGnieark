@@ -7,16 +7,21 @@ class DevicesManager extends Route{
         $tpl = new TplBlock();
 
         $devicesSRC = yaml_parse( file_get_contents("../src/Devices.yml") );
-        var_dump($devicesSRC);
-
-
-
+        foreach( $devicesSRC["categories"] as $cat ){
+            $tplCatDevices = new TplBlock("catDevices");
+            $tplCatDevices->addVars(array(
+                "value"     => $cat["name"],
+                "caption"   => $cat["display_name"]
+            ));
+        }
+        $tpl->addSubBlock($tplCatDevices);
+   
         return $tpl->applyTplFile("../templates/DevicesManager.html");
     }
 
     static public function get_custom_js()
     {
-        return file_get_contents("../templates/DevicesManager.js");
+        return "<script>\n" . file_get_contents("../templates/DevicesManager.js") . "\n</script>";
     }
 
 }

@@ -60,9 +60,9 @@ if($currentUser->is_connected() === false)
     $tpl = new TplBlock();
     $tpl->addVars(
         array(
-                "InstanceTitle"             => Config::get_option_value("About","InstanceTitle",true),
-                "structure_name_with_br"    => Config::get_option_value("About","entreprise_name_with_br",true),
-                "description_on_login_page_html" => Config::get_option_value("About","description_on_login_page_html",true)
+                "InstanceTitle"                     => Config::get_option_value("About","InstanceTitle",true),
+                "structure_name_with_br"            => Config::get_option_value("About","entreprise_name_with_br",true),
+                "description_on_login_page_html"    => Config::get_option_value("About","description_on_login_page_html",true)
         )
     );
     if(file_exists("../templates/connect.custom.html")){
