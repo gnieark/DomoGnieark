@@ -1,8 +1,9 @@
 <?php
 
-class DevicesManagerApi extends Route{
+class DevicesManagerAPI extends Route{
 
     protected static $displayOnPage = false;
+
 
     static public function send_content(PDO $db, User $user)
     {
@@ -15,6 +16,9 @@ class DevicesManagerApi extends Route{
     }
 
     static private function send_model_list()
+    {
+
+    }
 
 
 
