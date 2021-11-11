@@ -12,5 +12,24 @@ function getSelectedValueOnSelect( select )
 function changeCat(e)
 {
     let selectedCat = getSelectedValueOnSelect( document.querySelector('#SelectCatDevices') );
-    alert(selectedCat);
+
+    let selectModels = document.querySelector('#addDeviceModel');
+    
+    fetch ("index.php?menu=DevicesManagerAPI&list=models&category=" + selectedCat )
+    .then (response => response.json())
+    .then ( data => {
+        let selectModels = document.querySelector('#addDeviceModel');
+        //empty the select:
+        while (selectModels.hasChildNodes()) {
+            selectModels.removeChild(selectModels.lastChild);
+        }
+        data.forEach( function(model) {
+            let selectModels = document.querySelector('#addDeviceModel');
+            let opt = document.createElement("option");
+            opt.text = model["displayName"];
+            opt.value = model["name"];
+            selectModels.add(opt,null);
+        });
+
+    });
 }

@@ -1,18 +1,31 @@
 ---
 categories:
-  - name: SwitchesHTTP
+  SwitchesHTTP:
     display_name: "Switches connected via an http API"
     models:
-    - SonoffMiniR2:
-      displayName: "Sonoff Mini R2 with DIY mode activated"
-      RouteClass : "Devices_Switchs_Sonoff_MiniR2_DIYMode"
-      needed-to-configure:
-      - ip:
-        type: string
-      - port:
-        type: int
-      - scheme:
-        type: enum
-        enum:
-        - http
-        - https
+      SonoffMini:
+        displayName: "Sonoff Mini with DIY mode activated"
+        RouteClass : "Devices_Switchs_Sonoff_MiniR2_DIYMode"
+        needed-to-configure:
+        - ip:
+          type: string
+        - port:
+          type: int
+        - scheme:
+          type: enum
+          enum:
+          - http
+          - https
+      SonoffMiniR2:
+        displayName: "Sonoff Mini R2 with DIY mode activated"
+        RouteClass : "Devices_Switchs_Sonoff_MiniR2_DIYMode"
+        needed-to-configure:
+        - ip:
+          type: string
+        - port:
+          type: int
+        - scheme:
+          type: enum
+          enum:
+          - http
+          - https

@@ -7,10 +7,10 @@ class DevicesManager extends Route{
         $tpl = new TplBlock();
 
         $devicesSRC = yaml_parse( file_get_contents("../src/Devices.yml") );
-        foreach( $devicesSRC["categories"] as $cat ){
+        foreach( $devicesSRC["categories"] as $catName => $cat ){
             $tplCatDevices = new TplBlock("catDevices");
             $tplCatDevices->addVars(array(
-                "value"     => $cat["name"],
+                "value"     => $catName,
                 "caption"   => $cat["display_name"]
             ));
         }
