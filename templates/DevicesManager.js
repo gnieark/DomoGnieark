@@ -25,7 +25,7 @@ function changeCat(e)
 
     let selectModels = document.querySelector('#addDeviceModel');
     
-    fetch ("index.php?menu=DevicesManagerAPI&list=models&category=" + selectedCat )
+    fetch ("/DevicesManagerAPI/category/" +  selectedCat + "/models")
     .then (response => response.json())
     .then ( data => {      
         //empty the select:
@@ -98,7 +98,7 @@ function changeModel(e)
     }
     let selectedCat = getSelectedValueOnSelect( document.querySelector('#SelectCatDevices') );
     let selectedModel = getSelectedValueOnSelect( document.querySelector('#addDeviceModel') );
-    fetch("index.php?menu=DevicesManagerAPI&list=needed-to-configure&category=" + selectedCat  + "&model=" + selectedModel )
+    fetch("/DevicesManagerAPI/category/" +  selectedCat + "/model/" + selectedModel + "/needed-to-configure")
     .then (response => response.json())
     .then ( data => { 
         for (var k in data){

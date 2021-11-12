@@ -2,7 +2,7 @@
 class MenuItem
 {
 
-    const QUERYPREFIX = "/index.php?menu=";
+    const QUERYPREFIX = "/";
     private $name = NULL;
     public $shortName = NULL;
     private $levelNeeded = 'admin';
@@ -13,9 +13,9 @@ class MenuItem
 
     public function is_the_current_menu_item()
     {
-        if( isset($_GET['menu']) && $_GET['menu'] == $this->shortName)
+        
+        if(preg_match("/^\/" . $this->shortName . "/",  $_SERVER['REQUEST_URI'] ) )
             return true;
-
         return false;
     }
     

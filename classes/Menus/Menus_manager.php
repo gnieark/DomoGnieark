@@ -110,7 +110,10 @@ class Menus_manager
 
     public function get_current_menu()
     {
-        $shortname = (isset($_GET["menu"]))? $_GET["menu"] : "";
+
+        preg_match("/^\/([a-zA-Z0-9_]*)($|\/)/", $_SERVER['REQUEST_URI'], $matches );
+
+        $shortname = $matches[1];
 
         if ( $shortname == "" ){
 

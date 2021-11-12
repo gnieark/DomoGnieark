@@ -30,8 +30,8 @@ try {
 @session_start();
 
 //logout
-if(isset($_GET["menu"]) && $_GET["menu"] == "logout"){
-
+if( $_SERVER['REQUEST_URI'] == "/logout" )
+{
     unset($_SESSION["user"]);
     header('Location: /'); 
     die();

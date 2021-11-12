@@ -25,16 +25,17 @@ class DevicesManager extends Route{
 
     static public function apply_post(PDO $db, User $user)
     {
+        /*
         $act = isset($_GET["act"]) ? $_GET["act"] : "";
         switch ($act){
             case "addDevice":
 
                 break;
             default:
-                //401?
+                //400?
                 break;
         }
-        
+        */
     }
 
     static public function get_custom_js()

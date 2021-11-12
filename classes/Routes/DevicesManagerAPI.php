@@ -8,15 +8,16 @@ class DevicesManagerAPI extends Route{
     static public function send_content(PDO $db, User $user)
     {
         
-        if( isset($_GET["list"]) &&  $_GET["list"] == "models" && isset( $_GET["category"] ) )
+        if( preg_match("/^\/DevicesManagerAPI\/category\/([a-zA-Z0-9_]*)\/models/", $_SERVER['REQUEST_URI'], $matches ) )
         {
-            self::send_json_models_list($_GET["category"]);
+            self::send_json_models_list($matches[1]);
         }
-        elseif( isset($_GET["list"]) &&  ($_GET["list"] == "needed-to-configure") && isset($_GET['model']) && isset( $_GET["category"] ))
+        elseif( preg_match("/^\/DevicesManagerAPI\/category\/([a-zA-Z0-9_]*)\/model\/([a-zA-Z0-9_]*)\/needed-to-configure/", $_SERVER['REQUEST_URI'], $matches ) )
         {
-            self::send_json_needed_to_configure($_GET["category"],$_GET['model']);
-
-        }else{
+            self::send_json_needed_to_configure($matches[1],$matches[2]);
+        }
+        else
+        {
             self::send_404_json_style();
         }
         
