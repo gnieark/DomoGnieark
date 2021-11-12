@@ -62,8 +62,14 @@ function createInputLine(key,data)
             p.appendChild(inputInt);
             break;
         case 'enum':
-            
-
+            let inputSelect = createElem("select",{"name": key, "id": "custom" + key});
+            data.enum.forEach(function(item){
+              let opt = document.createElement("option");
+              opt.value = item;
+              opt.text = item;
+              inputSelect.add(opt);
+            });
+            p.appendChild(inputSelect);
             break;
         default:
 
