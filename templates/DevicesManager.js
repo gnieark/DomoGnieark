@@ -39,8 +39,9 @@ function changeCat(e)
 
 function changeModel(e)
 {
+    let selectedCat = getSelectedValueOnSelect( document.querySelector('#SelectCatDevices') );
     let selectedModel = getSelectedValueOnSelect( document.querySelector('#addDeviceModel') );
-    fetch("index.php?menu=DevicesManagerAPI&list=needed-to-configure&model=" + selectedModel )
+    fetch("index.php?menu=DevicesManagerAPI&list=needed-to-configure&category=" + selectedCat  + "&model=" + selectedModel )
     .then (response => response.json())
     .then ( data => { 
 

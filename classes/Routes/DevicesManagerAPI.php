@@ -40,15 +40,21 @@ class DevicesManagerAPI extends Route{
         }
     }
     static private function send_json_needed_to_configure($category,$model){
-        
+        $devicesSRC = yaml_parse( file_get_contents("../src/Devices.yml") );
+        if(isset($devicesSRC["categories"][$category]["models"][$model] )){
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode($devicesSRC["categories"][$category]["models"][$model]["needed-to-configure"], true  );
+        }else{
+            self::send_404_json_style("Model and / or category not found");
+        }
     }
-    
-    static private function send_404_json_style(){
+
+    static private function send_404_json_style($customMessage = ""){
         header("HTTP/1.1 404 Not Found");
         header('Content-Type: application/json; charset=utf-8');
         echo (json_encode(array(
             "code" => 404,
-            "message" => "Resource you asked for is not found."
+            "message" => $customMessage  == "" ? "Resource you asked for is not found." : $customMessage 
         )));
 
     }
