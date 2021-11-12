@@ -3,7 +3,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     //the event occurred
     document.querySelector('#SelectCatDevices').addEventListener('change', changeCat);
     document.querySelector('#addDeviceModel').addEventListener('change', changeModel);
-
+    changeCat();
+    changeModel();
 })
 
 function createElem(type,attributes)

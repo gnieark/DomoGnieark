@@ -6,6 +6,9 @@ class DevicesManager extends Route{
     {
         $tpl = new TplBlock();
 
+        $tpl->addVars(array(
+            "formAddActionUrl"  => "index.php?menu=DevicesManager&amp;act=addDevice"
+        ));
         $devicesSRC = yaml_parse( file_get_contents("../src/Devices.yml") );
         foreach( $devicesSRC["categories"] as $catName => $cat ){
             $tplCatDevices = new TplBlock("catDevices");
@@ -17,6 +20,21 @@ class DevicesManager extends Route{
         $tpl->addSubBlock($tplCatDevices);
    
         return $tpl->applyTplFile("../templates/DevicesManager.html");
+    }
+
+
+    static public function apply_post(PDO $db, User $user)
+    {
+        $act = isset($_GET["act"]) ? $_GET["act"] : "";
+        switch ($act){
+            case "addDevice":
+
+                break;
+            default:
+                //401?
+                break;
+        }
+        
     }
 
     static public function get_custom_js()

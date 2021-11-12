@@ -4,11 +4,11 @@
     <article>
     <p>
         <label for="inputAddName">Nom:</label>
-        <input type="text" name="addDeviceName" id="inputAddName"/>
+        <input type="text" name="addDeviceName" id="inputAddName" required minlength="1"/>
     </p>
     <p>
         <label for="SelectCatDevices">Catégorie de matériels</label>
-        <select name="addDeviceCat" id="SelectCatDevices">
+        <select name="addDeviceCat" id="SelectCatDevices" required pattern=".{1,}">
             <option value=""></option>
             <!-- BEGIN catDevices -->
             <option value="{{catDevices.value}}">{{catDevices.caption}}</option>
@@ -17,7 +17,7 @@
     </p>
     <p>
         <label for="SelectDeviceModel">Modèle:</label>
-        <select name="addDeviceModel" id="addDeviceModel">
+        <select name="addDeviceModel" id="addDeviceModel" required pattern=".{1,}">
         </select>
     </p>
     </article>
