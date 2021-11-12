@@ -23,5 +23,9 @@ class DevicesManager extends Route{
     {
         return "<script>\n" . file_get_contents("../templates/DevicesManager.js") . "\n</script>";
     }
+    static public function get_custom_css(PDO $db, User $user)
+    {
+        return "<style>\n" . file_get_contents("../templates/DevicesManager.css") . "\n</style";
+    }
 
 }

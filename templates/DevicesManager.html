@@ -1,25 +1,33 @@
-<article>
+<section>
 <h2>Ajouter un matériel</h2>
 <form method="post" action="{{formAddActionUrl}}">
-<p>
-    <label for="inputAddName">Nom:</label>
-    <input type="text" name="addDeviceName" id="inputAddName"/>
-</p>
-<p>
-    <label for="SelectCatDevices">Catégorie de matériels</label>
-    <select name="addDeviceCat" id="SelectCatDevices">
-        <option value=""></option>
-        <!-- BEGIN catDevices -->
-        <option value="{{catDevices.value}}">{{catDevices.caption}}</option>
-        <!-- END catDevices -->
-    </select>
-</p>
-<p>
-    <label for="SelectDeviceModel">Modèle:</label>
-    <select name="addDeviceModel" id="addDeviceModel">
-    </select>
-</p>
+    <article>
+    <p>
+        <label for="inputAddName">Nom:</label>
+        <input type="text" name="addDeviceName" id="inputAddName"/>
+    </p>
+    <p>
+        <label for="SelectCatDevices">Catégorie de matériels</label>
+        <select name="addDeviceCat" id="SelectCatDevices">
+            <option value=""></option>
+            <!-- BEGIN catDevices -->
+            <option value="{{catDevices.value}}">{{catDevices.caption}}</option>
+            <!-- END catDevices -->
+        </select>
+    </p>
+    <p>
+        <label for="SelectDeviceModel">Modèle:</label>
+        <select name="addDeviceModel" id="addDeviceModel">
+        </select>
+    </p>
+    </article>
+    <article id="deviceCustomAwnswers">
+        
+    </article>
 </form>
 
-</article>
+</section>
+<section>
 <h2>Liste des matériels</h2>
+
+</section>

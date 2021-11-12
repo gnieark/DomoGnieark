@@ -1,8 +1,9 @@
 
 document.addEventListener('DOMContentLoaded', (event) => {
     //the event occurred
-    let theCatSelect = document.querySelector('#SelectCatDevices');
-    theCatSelect.addEventListener('change', changeCat);
+    document.querySelector('#SelectCatDevices').addEventListener('change', changeCat);
+    document.querySelector('#addDeviceModel').addEventListener('change', changeModel);
+
 })
 
 function getSelectedValueOnSelect( select )
@@ -22,7 +23,10 @@ function changeCat(e)
         while (selectModels.hasChildNodes()) {
             selectModels.removeChild(selectModels.lastChild);
         }
-
+        let opt = document.createElement("option");
+        opt.text = "";
+        opt.value = "";
+        selectModels.add(opt,null);
         data.forEach( function(model) {
             let opt = document.createElement("option");
             opt.text = model["displayName"];
@@ -31,4 +35,9 @@ function changeCat(e)
         });
 
     });
+}
+
+function changeModel(e)
+{
+
 }
