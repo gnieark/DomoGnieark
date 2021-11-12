@@ -83,8 +83,10 @@ $mManager->add_menus_items_from_json_file( realpath( __DIR__ . '/../') . '/confi
 
 //Apply current Menu:
 $currentMenu = $mManager->get_current_menu();
-$messages = $currentMenu->apply_post($db,$currentUser);
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $messages = $currentMenu->apply_post($db,$currentUser);
+}
 
 if(!$currentMenu->display_on_page())
 {

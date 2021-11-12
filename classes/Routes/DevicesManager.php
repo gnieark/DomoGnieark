@@ -7,7 +7,7 @@ class DevicesManager extends Route{
         $tpl = new TplBlock();
 
         $tpl->addVars(array(
-            "formAddActionUrl"  => "index.php?menu=DevicesManager&amp;act=addDevice"
+            "formAddActionUrl"  => "/DevicesManager/addDevice"
         ));
         $devicesSRC = yaml_parse( file_get_contents("../src/Devices.yml") );
         foreach( $devicesSRC["categories"] as $catName => $cat ){
@@ -25,17 +25,30 @@ class DevicesManager extends Route{
 
     static public function apply_post(PDO $db, User $user)
     {
-        /*
-        $act = isset($_GET["act"]) ? $_GET["act"] : "";
-        switch ($act){
-            case "addDevice":
-
+        switch( $_SERVER['REQUEST_URI'] ){
+            case "/DevicesManager/addDevice":
+                /*
+                array(6) {
+  ["addDeviceName"]=>
+  string(9) "dfjhdfhdf"
+  ["addDeviceCat"]=>
+  string(12) "SwitchesHTTP"
+  ["addDeviceModel"]=>
+  string(12) "SonoffMiniR2"
+  ["ip"]=>
+  string(4) "1566"
+  ["port"]=>
+  string(2) "80"
+  ["scheme"]=>
+  string(4) "http"
+}
+*/
                 break;
             default:
-                //400?
+                C400::send_content($db,$user);
+                die();
                 break;
         }
-        */
     }
 
     static public function get_custom_js()

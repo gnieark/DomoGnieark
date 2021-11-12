@@ -14,7 +14,7 @@ class MenuItem
     public function is_the_current_menu_item()
     {
         
-        if(preg_match("/^\/" . $this->shortName . "/",  $_SERVER['REQUEST_URI'] ) )
+        if(preg_match("/^\/" . $this->shortName . "($|\/)/",  $_SERVER['REQUEST_URI'] ) )
             return true;
         return false;
     }

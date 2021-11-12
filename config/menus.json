@@ -6,6 +6,13 @@
         "CRUDclass": "C404",
         "default_one":true
     },
+    "400":{
+        "name":"400",
+        "default_level_needed": "guest",
+        "display_on_nav": false,
+        "CRUDclass": "C400",
+        "default_one":false
+    },
     "Main":{
         "name": "Main page",
         "default_level_needed": "user",
