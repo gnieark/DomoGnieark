@@ -6,6 +6,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 })
 
+function createElem(type,attributes)
+{
+    var elem=document.createElement(type);
+    for (var i in attributes)
+    {elem.setAttribute(i,attributes[i]);}
+    return elem;
+}
+
 function getSelectedValueOnSelect( select )
 {
     return select.options[ select.selectedIndex ].value;
@@ -36,14 +44,29 @@ function changeCat(e)
 
     });
 }
-
+function createInputLine(key,data)
+{
+    let p = createElem("p",{});
+    let label = createElem("label",{"for" : "custom" + key});
+    label.innerHTML = data.displayName;
+    p.appendChild(label);
+    return p;
+}
 function changeModel(e)
 {
+    let customAwnsersContainer = document.querySelector('#deviceCustomAwnswers');
+    while (customAwnsersContainer.hasChildNodes()) {
+        customAwnsersContainer.removeChild(customAwnsersContainer.lastChild);
+    }
     let selectedCat = getSelectedValueOnSelect( document.querySelector('#SelectCatDevices') );
     let selectedModel = getSelectedValueOnSelect( document.querySelector('#addDeviceModel') );
     fetch("index.php?menu=DevicesManagerAPI&list=needed-to-configure&category=" + selectedCat  + "&model=" + selectedModel )
     .then (response => response.json())
     .then ( data => { 
-
+        for (var k in data){
+            if (typeof data[k] !== 'function') {
+                customAwnsersContainer.appendChild(createInputLine(k,data[k]));
+            }
+        }
     });
 }

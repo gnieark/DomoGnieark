@@ -8,10 +8,13 @@ categories:
         RouteClass : "Devices_Switchs_Sonoff_MiniR2_DIYMode"
         needed-to-configure:
           ip:
+            displayName: IP or FQDN
             type: string
           port:
+            displayName: Port
             type: int
           scheme:
+            displayName: Scheme
             type: enum
             enum:
             - http
@@ -21,10 +24,13 @@ categories:
         RouteClass : "Devices_Switchs_Sonoff_MiniR2_DIYMode"
         needed-to-configure:
           ip:
+            displayName: IP or FQDN
             type: string
           port:
+            displayName: Port
             type: int
           scheme:
+            displayName: Scheme
             type: enum
             enum:
             - http
