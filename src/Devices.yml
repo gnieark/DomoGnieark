@@ -7,25 +7,25 @@ categories:
         displayName: "Sonoff Mini with DIY mode activated"
         RouteClass : "Devices_Switchs_Sonoff_MiniR2_DIYMode"
         needed-to-configure:
-        - ip:
-          type: string
-        - port:
-          type: int
-        - scheme:
-          type: enum
-          enum:
-          - http
-          - https
+          ip:
+            type: string
+          port:
+            type: int
+          scheme:
+            type: enum
+            enum:
+            - http
+            - https
       SonoffMiniR2:
         displayName: "Sonoff Mini R2 with DIY mode activated"
         RouteClass : "Devices_Switchs_Sonoff_MiniR2_DIYMode"
         needed-to-configure:
-        - ip:
-          type: string
-        - port:
-          type: int
-        - scheme:
-          type: enum
-          enum:
-          - http
-          - https
+          ip:
+            type: string
+          port:
+            type: int
+          scheme:
+            type: enum
+            enum:
+            - http
+            - https
