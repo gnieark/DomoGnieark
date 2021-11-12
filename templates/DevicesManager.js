@@ -55,10 +55,16 @@ function createInputLine(key,data)
     {
         case 'string':
             let inputStr = createElem("input",{"type": "text", "name": key, "id": "custom" + key});
+            if (typeof data.default !== 'undefined') {
+                inputStr.value = data.default;
+            }
             p.appendChild(inputStr);
             break;
         case 'int':
             let inputInt = createElem("input", {"type": "number", "min": data.min,"max": data.max, "name": key, "id": "custom" + key});
+            if (typeof data.default !== 'undefined') {
+                inputInt.value = data.default;
+            }
             p.appendChild(inputInt);
             break;
         case 'enum':
@@ -67,6 +73,10 @@ function createInputLine(key,data)
               let opt = document.createElement("option");
               opt.value = item;
               opt.text = item;
+              if ((typeof data.default !== 'undefined') &&  (data.default == item)) {
+                opt.selected = "selected";
+              }
+
               inputSelect.add(opt);
             });
             p.appendChild(inputSelect);

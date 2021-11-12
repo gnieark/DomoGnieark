@@ -15,12 +15,14 @@ categories:
             type: int
             min: 1
             max: 65535
+            default: 80
           scheme:
             displayName: Scheme
             type: enum
             enum:
             - http
             - https
+            default: http
       SonoffMiniR2:
         displayName: "Sonoff Mini R2 with DIY mode activated"
         RouteClass : "Devices_Switchs_Sonoff_MiniR2_DIYMode"
