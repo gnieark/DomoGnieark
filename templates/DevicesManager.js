@@ -17,14 +17,13 @@ function changeCat(e)
     
     fetch ("index.php?menu=DevicesManagerAPI&list=models&category=" + selectedCat )
     .then (response => response.json())
-    .then ( data => {
-        let selectModels = document.querySelector('#addDeviceModel');
+    .then ( data => {      
         //empty the select:
         while (selectModels.hasChildNodes()) {
             selectModels.removeChild(selectModels.lastChild);
         }
+
         data.forEach( function(model) {
-            let selectModels = document.querySelector('#addDeviceModel');
             let opt = document.createElement("option");
             opt.text = model["displayName"];
             opt.value = model["name"];
