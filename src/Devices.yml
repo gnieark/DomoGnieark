@@ -13,6 +13,8 @@ categories:
           port:
             displayName: Port
             type: int
+            min: 1
+            max: 65535
           scheme:
             displayName: Scheme
             type: enum
@@ -29,6 +31,8 @@ categories:
           port:
             displayName: Port
             type: int
+            min: 1
+            max: 65535
           scheme:
             displayName: Scheme
             type: enum

@@ -50,6 +50,27 @@ function createInputLine(key,data)
     let label = createElem("label",{"for" : "custom" + key});
     label.innerHTML = data.displayName;
     p.appendChild(label);
+
+    switch (data.type)
+    {
+        case 'string':
+            let inputStr = createElem("input",{"type": "text", "name": key, "id": "custom" + key});
+            p.appendChild(inputStr);
+            break;
+        case 'int':
+            let inputInt = createElem("input", {"type": "number", "min": data.min,"max": data.max, "name": key, "id": "custom" + key});
+            p.appendChild(inputInt);
+            break;
+        case 'enum':
+            
+
+            break;
+        default:
+
+            break;
+
+    }
+
     return p;
 }
 function changeModel(e)
