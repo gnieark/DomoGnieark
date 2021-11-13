@@ -17,11 +17,17 @@ function createElem(type,attributes)
 
 function getSelectedValueOnSelect( select )
 {
+    if( select.selectedIndex == -1 ){
+        return -1;
+    }
     return select.options[ select.selectedIndex ].value;
 }
 function changeCat(e)
 {
     let selectedCat = getSelectedValueOnSelect( document.querySelector('#SelectCatDevices') );
+    if (selectedCat == -1){
+        return;
+    }
 
     let selectModels = document.querySelector('#addDeviceModel');
     
@@ -38,7 +44,7 @@ function changeCat(e)
         selectModels.add(opt,null);
         data.forEach( function(model) {
             let opt = document.createElement("option");
-            opt.text = model["displayName"];
+            opt.text = model["display_name"];
             opt.value = model["name"];
             selectModels.add(opt,null);
         });
@@ -49,7 +55,7 @@ function createInputLine(key,data)
 {
     let p = createElem("p",{});
     let label = createElem("label",{"for" : "custom" + key});
-    label.innerHTML = data.displayName;
+    label.innerHTML = data.display_name;
     p.appendChild(label);
 
     switch (data.type)
@@ -98,6 +104,9 @@ function changeModel(e)
     }
     let selectedCat = getSelectedValueOnSelect( document.querySelector('#SelectCatDevices') );
     let selectedModel = getSelectedValueOnSelect( document.querySelector('#addDeviceModel') );
+    if ( (selectedModel == -1) || (selectedModel == '') ){
+        return false;
+    } 
     fetch("/DevicesManagerAPI/category/" +  selectedCat + "/model/" + selectedModel + "/needed-to-configure")
     .then (response => response.json())
     .then ( data => { 

@@ -29,9 +29,10 @@ class DevicesManagerAPI extends Route{
         if( isset( $devicesSRC["categories"][$category] ) ){
             $models = array();
             foreach( $devicesSRC["categories"][$category]["models"] as $modelName => $model ){
+              
                 $models[] = array(
                     "name" => htmlentities($modelName),
-                    "displayName" => htmlentities($model["displayName"])
+                    "display_name" => htmlentities($model["display_name"])
                 );
             }
             header('Content-Type: application/json; charset=utf-8');

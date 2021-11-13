@@ -8,16 +8,16 @@ categories:
         RouteClass : "Devices_Switchs_Sonoff_MiniR2_DIYMode"
         needed-to-configure:
           ip:
-            displayName: IP or FQDN
+            display_name: IP or FQDN
             type: string
           port:
-            displayName: Port
+            display_name: Port
             type: int
             min: 1
             max: 65535
             default: 80
           scheme:
-            displayName: Scheme
+            display_name: Scheme
             type: enum
             enum:
             - http
