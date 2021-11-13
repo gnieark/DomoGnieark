@@ -3,6 +3,7 @@
 //autoload classes
 spl_autoload_register(function ($class_name) {
     $classFolders = array   ("../classes/"
+                            ,"../classes/DataList/"
                             ,"../classes/Devices/"
                             ,"../classes/Template/"
                             ,"../classes/Routes/"
