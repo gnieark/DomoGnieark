@@ -27,22 +27,50 @@ class DevicesManager extends Route{
     {
         switch( $_SERVER['REQUEST_URI'] ){
             case "/DevicesManager/addDevice":
-                /*
-                array(6) {
-  ["addDeviceName"]=>
-  string(9) "dfjhdfhdf"
-  ["addDeviceCat"]=>
-  string(12) "SwitchesHTTP"
-  ["addDeviceModel"]=>
-  string(12) "SonoffMiniR2"
-  ["ip"]=>
-  string(4) "1566"
-  ["port"]=>
-  string(2) "80"
-  ["scheme"]=>
-  string(4) "http"
-}
-*/
+
+                $devicesSRC = yaml_parse( file_get_contents("../src/Devices.yml") );
+
+                //test if category exists
+                $filters = array( "name"  => $_POST["addDeviceCat"]) ;
+                $cat = DataList_devices_categories::GET($db, $user, false, $filters);
+    
+                if(empty($cat)){
+                    
+                    if(array_key_exists($_POST["addDeviceCat"], $devicesSRC["categories"]))
+                    {
+                        $catValues = array(
+                            "name"  => $_POST["addDeviceCat"],
+                            "display_name"  => $devicesSRC["categories"][ $_POST["addDeviceCat"] ][ "display_name" ] 
+                        );
+
+                        $cat_id = DataList_devices_categories::POST($db, $user, $catValues);
+                        $cat_name = $_POST["addDeviceCat"];
+                    }else{
+                        return "unknowed device category";
+                    }
+                }else{
+                   $cat_id = $cat[0]["id"];
+                   $cat_name = $cat[0]["name"];
+                }
+        
+                //generate config JSON
+                if(!isset($devicesSRC["categories"][$cat_name]["models"][$_POST["addDeviceModel"]])){
+                    return "unknowed device model";
+                }
+                $neededToConfigure = $devicesSRC["categories"][$cat_name]["models"][$_POST["addDeviceModel"]]["needed-to-configure"];
+                $configuration = array();
+                foreach( array_keys( $neededToConfigure ) as $keyToConfigure)
+                {
+                    $configuration[ $keyToConfigure ] = $_POST[ $keyToConfigure ];
+
+                }
+                $devicesValues = ['display_name'    =>  $_POST["addDeviceName"]
+                                 ,'category_id'     => $cat_id
+                                 ,'description'     => ''
+                                 ,'configuration'   => json_encode($configuration)
+                                 ];
+                DataList_devices::POST($db, $user, $devicesValues);
+
                 break;
             default:
                 C400::send_content($db,$user);
