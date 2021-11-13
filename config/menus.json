@@ -14,10 +14,10 @@
         "default_one":false
     },
     "Main":{
-        "name": "Main page",
+        "name": "Dashboard",
         "default_level_needed": "user",
         "display_on_nav": true,
-        "CRUDclass": "Main",
+        "CRUDclass": "Dashboard",
         "default_one_if_get_empty" : true
     },
     "DevicesManager":{

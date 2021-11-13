@@ -26,9 +26,22 @@ class DevicesManager extends Route{
         {
             $tplDevice = new TplBlock("devices");
             $tplDevice->addVars($device);
+
+            //customconfig
+            $configs = json_decode($device["configuration"]);
+            foreach( $configs as $key => $value)
+            {
+                $tplConf = new TplBlock("customconfig");
+                $tplConf->addVars(array(
+                    "key"   => $key,
+                    "value" => $value
+                ));
+                $tplDevice->addSubBlock($tplConf);
+            }
             $tpl->addSubBlock($tplDevice);
+
         }
-   
+        
         return $tpl->applyTplFile("../templates/DevicesManager.html");
     }
 
