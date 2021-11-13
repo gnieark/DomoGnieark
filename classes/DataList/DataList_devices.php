@@ -61,6 +61,7 @@ class DataList_Devices extends DataList
                 FROM
                     $tbl,
                     $tblModels,
+                    $tblCategories,
                     users as creator,
                     users as updator
                 WHERE
@@ -70,7 +71,7 @@ class DataList_Devices extends DataList
                 AND $tblModels.category_id = $tblCategories.id
                 ". ($activesOnly? "AND $tbl.active='1'" : "")
                 .self::generate_sql_clauses_from_filter_arr($filters);
-     
+        //echo $sql;
         $rs = $db->prepare($sql);
         $rs->execute(self::generate_dbo_array_from_filter_arr($filters));
         return $rs->fetchAll(PDO::FETCH_ASSOC);

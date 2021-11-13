@@ -9,6 +9,7 @@ class DataList_devices_models extends DataList
     protected static function get_specificics_fields_create()
     {
         return "
+            `name`  text NOT NULL,
             `display_name` text NOT NULL,
             `category_id` int(11) NOT NULL
         ";

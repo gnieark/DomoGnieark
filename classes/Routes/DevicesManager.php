@@ -21,7 +21,7 @@ class DevicesManager extends Route{
 
 
         $devicesList = DataList_devices::GET($db, $user);
-        
+
         foreach($devicesList as $device)
         {
             $tplDevice = new TplBlock("devices");
@@ -32,6 +32,52 @@ class DevicesManager extends Route{
         return $tpl->applyTplFile("../templates/DevicesManager.html");
     }
 
+    /*
+    * Return the id of a device model. Create it on database if is defined on devices.yaml 
+    * but not on the models table
+    */
+    static private function get_device_model_id_by_name(PDO $db, User $user, string $catName, string $modelName)
+    {
+        $devicesSRC = yaml_parse( file_get_contents("../src/Devices.yml") );
+
+        //test category, create it if needed
+        $filters = array( "name"  => $catName) ;
+        $cat = DataList_devices_categories::GET($db, $user, false, $filters);
+
+        if(empty($cat)){
+            if(array_key_exists($catName, $devicesSRC["categories"]))
+            {
+                $catValues = array(
+                    "name"  => $catName,
+                    "display_name"  => $devicesSRC["categories"][ $catName ][ "display_name" ] 
+                );
+
+                $cat_id = DataList_devices_categories::POST($db, $user, $catValues);
+            }else{
+                return false;
+            }
+        }else{
+            $cat_id = $cat[0]["id"];
+        }
+        //test model, create it if needed
+
+        $filtersModel = array( "name"   => $model, "category_id"    => $cat_id);
+        $models = DataList_devices_models::GET($db, $user, false, $filtersModels);
+        if( empty($models) ){
+            if(!isset($devicesSRC["categories"][$catName]["models"][$modelName])){
+                return false;
+            }
+            $modelValues = array(
+                "name"          => $modelName,
+                "display_name"  => $devicesSRC["categories"][$catName]["models"][$modelName]["display_name"],
+                "category_id"   => $cat_id
+            );
+            return DataList_devices_models::POST($db, $user, $modelValues);
+        }else{
+            return $models[0]["id"];
+        }
+
+    }
 
     static public function apply_post(PDO $db, User $user)
     {
@@ -40,42 +86,16 @@ class DevicesManager extends Route{
 
                 $devicesSRC = yaml_parse( file_get_contents("../src/Devices.yml") );
 
-                //test if category exists
-                $filters = array( "name"  => $_POST["addDeviceCat"]) ;
-                $cat = DataList_devices_categories::GET($db, $user, false, $filters);
-    
-                if(empty($cat)){
-                    
-                    if(array_key_exists($_POST["addDeviceCat"], $devicesSRC["categories"]))
-                    {
-                        $catValues = array(
-                            "name"  => $_POST["addDeviceCat"],
-                            "display_name"  => $devicesSRC["categories"][ $_POST["addDeviceCat"] ][ "display_name" ] 
-                        );
-
-                        $cat_id = DataList_devices_categories::POST($db, $user, $catValues);
-                        $cat_name = $_POST["addDeviceCat"];
-                    }else{
-                        return "unknowed device category";
-                    }
-                }else{
-                   $cat_id = $cat[0]["id"];
-                   $cat_name = $cat[0]["name"];
-                }
-        
-                //generate config JSON
-                if(!isset($devicesSRC["categories"][$cat_name]["models"][$_POST["addDeviceModel"]])){
-                    return "unknowed device model";
-                }
-                $neededToConfigure = $devicesSRC["categories"][$cat_name]["models"][$_POST["addDeviceModel"]]["needed-to-configure"];
+                $neededToConfigure = $devicesSRC["categories"][$_POST["addDeviceCat"]]["models"][$_POST["addDeviceModel"]]["needed-to-configure"];
                 $configuration = array();
                 foreach( array_keys( $neededToConfigure ) as $keyToConfigure)
                 {
                     $configuration[ $keyToConfigure ] = $_POST[ $keyToConfigure ];
 
                 }
+
                 $devicesValues = ['display_name'    =>  $_POST["addDeviceName"]
-                                 ,'category_id'     => $cat_id
+                                 ,'model_id'        => self:: get_device_model_id_by_name($db, $user, $_POST["addDeviceCat"], $_POST["addDeviceModel"])
                                  ,'description'     => ''
                                  ,'configuration'   => json_encode($configuration)
                                  ];
