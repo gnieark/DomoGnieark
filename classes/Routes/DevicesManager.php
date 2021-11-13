@@ -18,6 +18,16 @@ class DevicesManager extends Route{
             ));
         }
         $tpl->addSubBlock($tplCatDevices);
+
+
+        $devicesList = DataList_devices::GET($db, $user);
+        
+        foreach($devicesList as $device)
+        {
+            $tplDevice = new TplBlock("devices");
+            $tplDevice->addVars($device);
+            $tpl->addSubBlock($tplDevice);
+        }
    
         return $tpl->applyTplFile("../templates/DevicesManager.html");
     }

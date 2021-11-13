@@ -27,21 +27,7 @@ foreach(array("login","password","admin") as $wanted_key ){
 }
 
 //autoload classes
-spl_autoload_register(function ($class_name) {
-    $classFolders = array(  "../classes/", 
-                            "../classes/Routes/",
-                            "../classes/User/",
-                            "../classes/Menus/",
-                        );
-    foreach($classFolders as $folder)
-    {
-        if(file_exists( $folder . $class_name . '.php')){
-            include $folder . $class_name . '.php';
-            return;
-        }
-    }
-});
-
+require_once ("../classes/Loader.php");
 
 //local db (mysql)
 

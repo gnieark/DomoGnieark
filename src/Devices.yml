@@ -4,7 +4,7 @@ categories:
     display_name: "Switches connected via an http API"
     models:
       SonoffMini:
-        displayName: "Sonoff Mini with DIY mode activated"
+        display_name: "Sonoff Mini with DIY mode activated"
         RouteClass : "Devices_Switchs_Sonoff_MiniR2_DIYMode"
         needed-to-configure:
           ip:
@@ -24,19 +24,19 @@ categories:
             - https
             default: http
       SonoffMiniR2:
-        displayName: "Sonoff Mini R2 with DIY mode activated"
+        display_name: "Sonoff Mini R2 with DIY mode activated"
         RouteClass : "Devices_Switchs_Sonoff_MiniR2_DIYMode"
         needed-to-configure:
           ip:
-            displayName: IP or FQDN
+            display_name: IP or FQDN
             type: string
           port:
-            displayName: Port
+            display_name: Port
             type: int
             min: 1
             max: 65535
           scheme:
-            displayName: Scheme
+            display_name: Scheme
             type: enum
             enum:
             - http
