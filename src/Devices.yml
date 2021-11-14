@@ -5,18 +5,18 @@ categories:
     models:
       SonoffMini:
         display_name: "Sonoff Mini with DIY mode activated"
-        RouteClass : "Devices_Switchs_Sonoff_MiniR2_DIYMode"
+        PHPClass : "Devices_Switchs_Sonoff_MiniR2_DIYMode"
         needed-to-configure:
-          ip:
+          device_ip:
             display_name: IP or FQDN
             type: string
-          port:
+          device_port:
             display_name: Port
             type: int
             min: 1
             max: 65535
             default: 80
-          scheme:
+          device_scheme:
             display_name: Scheme
             type: enum
             enum:
@@ -25,17 +25,17 @@ categories:
             default: http
       SonoffMiniR2:
         display_name: "Sonoff Mini R2 with DIY mode activated"
-        RouteClass : "Devices_Switchs_Sonoff_MiniR2_DIYMode"
+        PHPClass : "Devices_Switchs_Sonoff_MiniR2_DIYMode"
         needed-to-configure:
-          ip:
+          device_ip:
             display_name: IP or FQDN
             type: string
-          port:
+          device_port:
             display_name: Port
             type: int
             min: 1
             max: 65535
-          scheme:
+          device_scheme:
             display_name: Scheme
             type: enum
             enum:

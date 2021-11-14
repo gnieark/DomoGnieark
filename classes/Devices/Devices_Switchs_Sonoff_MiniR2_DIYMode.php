@@ -43,8 +43,8 @@ class Devices_Switchs_Sonoff_MiniR2_DIYMode extends Devices_Switchs_Sonoff_MiniR
         if(isset($params["device_ports"])){
             $this->set_device_port($params["device_ports"]);
         }
-        if(isset($params["scheme"])){
-            $this->set_scheme( $params["scheme"] );
+        if(isset($params["device_scheme"])){
+            $this->set_scheme( $params["device_scheme"] );
         }
 
     }
