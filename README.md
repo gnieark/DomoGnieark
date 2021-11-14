@@ -1,7 +1,6 @@
 # DomoGnieark
 
-I invent again the wheel. A WEB UI and an API to manage some home automation equipment. I'm starting, and if it's finally too painful, I'll forget about this project.
-
+A WEB UI and an API to manage some home automation equipment. Work in progress.
 
 # Installation
 In order to test, or to participate to dev because, it's not working yet.
