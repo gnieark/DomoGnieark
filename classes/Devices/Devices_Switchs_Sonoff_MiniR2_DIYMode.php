@@ -2,7 +2,7 @@
 class Devices_Switchs_Sonoff_MiniR2_DIYMode extends Devices_Switchs
 {
     
-    private $device_id = "";
+
     private $device_ip = "";
     private $device_port = 8081;
     private $is_Scheme_HTTPS = false;
@@ -11,11 +11,6 @@ class Devices_Switchs_Sonoff_MiniR2_DIYMode extends Devices_Switchs
     {
 
 
-    }
-    public function set_device_id($id)
-    {
-        $this->device_id = $id;
-        return $this;
     }
     public function set_device_ip($ip)
     {
@@ -34,11 +29,14 @@ class Devices_Switchs_Sonoff_MiniR2_DIYMode extends Devices_Switchs
     }
     public function __construct( $params = array() )
     {
+        if(isset($params["device_name"])){
+            $this->set_device_name( $params["device_name"] );
+        }
         if(isset($params["device_id"])){
             $this->set_device_id( $params["device_id"] );
         }
         if(isset($params["device_ip"])){
-            $this->set_device_ip = $params["device_ip"];
+            $this->set_device_ip ($params["device_ip"]);
         }
         if(isset($params["device_ports"])){
             $this->set_device_port($params["device_ports"]);
@@ -76,6 +74,16 @@ class Devices_Switchs_Sonoff_MiniR2_DIYMode extends Devices_Switchs
         return $result;
 
     }
+    public function get_snippet_as_XMLelement()
+    {
+        $c = new XmlElement( $this->containerHtmlType );
+        $title = new xmlElement ("h3");
+        $title->setContent($this->name);
+        $c->addChild($title);
+
+        return $c;
+    }
+
     public function Off()
     {
         return $this->makeRequest(false);
