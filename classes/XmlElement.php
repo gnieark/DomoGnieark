@@ -56,7 +56,7 @@ class XmlElement
     {
         if(!preg_match('/^[\w-]+$/', $name)) {
             throw new \UnexpectedValueException(
-                "Seuls des caracteres alphanumeriques sont permis dans le nom de l'element'"
+                "Only alpha numerics chars are allowed on name'"
             );
         }
         $this->name = $name;

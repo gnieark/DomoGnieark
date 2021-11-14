@@ -1,5 +1,5 @@
 <?php
-class Devices_Switchs_Sonoff_MiniR2_DIYMode extends Devices_Switchs_Sonoff_MiniR2_DIYMode
+class Devices_Switchs_Sonoff_MiniR2_DIYMode extends Devices_Switchs
 {
     
     private $device_id = "";
@@ -29,7 +29,7 @@ class Devices_Switchs_Sonoff_MiniR2_DIYMode extends Devices_Switchs_Sonoff_MiniR
     }
     public function set_scheme ($sheme)
     {
-        $this->$is_Scheme_HTTPS = ($sheme == "https");
+        $this->is_Scheme_HTTPS = ($sheme == "https");
         return $this;
     }
     public function __construct( $params = array() )

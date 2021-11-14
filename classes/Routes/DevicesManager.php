@@ -75,12 +75,13 @@ class DevicesManager extends Route{
         $devicesObjects = array();
 
         $devicesList = DataList_devices::GET($db, $user);
+        
         foreach($devicesList as $deviceData){
             $phpClass = self::get_device_class($deviceData["category_name"],$deviceData["model_name"] );
-
-
+            $params = json_decode( $deviceData["configuration"],true );
+            $params["device_id"] = $deviceData["id"];
+            $devicesObjects[$deviceData["id"]] = new $phpClass($params);
         }
-
 
         return $devicesObjects;
     }

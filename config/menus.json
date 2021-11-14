@@ -13,7 +13,7 @@
         "CRUDclass": "C400",
         "default_one":false
     },
-    "Main":{
+    "Dashboard":{
         "name": "Dashboard",
         "default_level_needed": "user",
         "display_on_nav": true,

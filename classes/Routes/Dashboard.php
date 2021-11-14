@@ -5,14 +5,13 @@ Class Dashboard extends Route
 
     static public function get_content_html(PDO $db, User $user)
     {
-        $tpl = new TplBlock();
+        //get Devices List
+        $content = new XmlElement("section");
+        foreach (DevicesManager::get_devices_objects($db, $user) as $device){
+            $content->addChild( $device->get_snippet_as_XMLelement());
+        }
 
-
-
-
-
-
-        return $tpl->applyTplFile("../templates/dashboard.html");
+        return $content->__toString();
     }
 
 
