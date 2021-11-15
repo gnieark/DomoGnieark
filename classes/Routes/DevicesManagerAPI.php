@@ -44,6 +44,7 @@ class DevicesManagerAPI extends Route{
         $devicesSRC = yaml_parse( file_get_contents("../src/Devices.yml") );
         if(isset($devicesSRC["categories"][$category]["models"][$model] )){
             header('Content-Type: application/json; charset=utf-8');
+            
             echo json_encode($devicesSRC["categories"][$category]["models"][$model]["needed-to-configure"], true  );
         }else{
             self::send_404_json_style("Model and / or category not found");

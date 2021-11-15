@@ -26,15 +26,18 @@ categories:
           SSLkey:
             display_name: Key for httpS authentification
             type: string
+            display_on_web_ui: false
           CAINFO:
             display_name: CA info The --cacert option
             type: string
           SSLCERT:
             display_name: "SSLCERT: --cert option"
             type: string
+            display_on_web_ui: false
           SSLCERTPASSWD:
             display_name: "SSLCERTPASSWD"
             type: string
+            display_on_web_ui: false
   SwitchesHTTP:
     display_name: "Switches connected via an http API"
     models:
