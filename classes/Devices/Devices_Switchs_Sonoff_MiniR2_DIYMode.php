@@ -22,29 +22,14 @@ class Devices_Switchs_Sonoff_MiniR2_DIYMode extends Devices_Switchs
         $this->device_port = $port;
         return $this;
     }
-    public function set_scheme ($sheme)
+    public function set_device_scheme ($sheme)
     {
         $this->is_Scheme_HTTPS = ($sheme == "https");
         return $this;
     }
     public function __construct( $params = array() )
     {
-        if(isset($params["device_name"])){
-            $this->set_device_name( $params["device_name"] );
-        }
-        if(isset($params["device_id"])){
-            $this->set_device_id( $params["device_id"] );
-        }
-        if(isset($params["device_ip"])){
-            $this->set_device_ip ($params["device_ip"]);
-        }
-        if(isset($params["device_ports"])){
-            $this->set_device_port($params["device_ports"]);
-        }
-        if(isset($params["device_scheme"])){
-            $this->set_scheme( $params["device_scheme"] );
-        }
-
+        $this->load_params($params);
     }
     private function makeRequest($on)
     {

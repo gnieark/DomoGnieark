@@ -45,6 +45,9 @@ class Devices_one_action_hackerspace_door extends Devices
         $this->SSLCERTPASSWORD = $SSLCERTPASSWORD;
         return $this;
     }
-
+    public function __construct( $params = array() )
+    {
+        $this->load_params($params);
+    }
 
 }

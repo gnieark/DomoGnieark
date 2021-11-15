@@ -3,10 +3,10 @@
 A WEB UI and an API to manage some home automation equipment. Work in progress.
 
 # Installation
-In order to test, or to participate to dev because, it's not working yet.
+(to test, or to contribute because, it's not working yet.)
 
-* All requests are computed by public/index.php See the sample doc/nginxSample.conf (The same as a symphony framework one)
-* file config/config.php must contain database settings
+* All requests are computed by public/index.php . Look at the sample doc/nginxSample.conf (The same as a symphony framework one)
+* The file config/config.php must contain database settings
 ```php
 <?php
 return (object) array(
@@ -17,7 +17,8 @@ return (object) array(
     )
 );
 ```
-* execute the init script to populate the dayabase
+* Execute the init script to populate the database.
     php install/initDatabase.php
 A user is created. admin, password : changeme.
+
 The day i'll create the user management interface, you will be able to change the password. for now, you can delete the user on the database and execute the install/create_user.php script.

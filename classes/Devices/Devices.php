@@ -36,7 +36,7 @@ class Devices {
         $container->addChild($message);
         return $container;
     }
-    public function __toString()
+    public function get_snippet()
     {
         return $this->get_snippet_as_XMLelement()->__toString();
     }
@@ -60,6 +60,15 @@ class Devices {
         return $this->name;
     }
 
+    protected function load_params($params){
+        foreach($params as $key=>$value)
+        {
+            $method = 'set_'.$key;
+            if(method_exists($this,$method)){
+                $this->$method($value);
+            }
+        }
+    }
 
 
 

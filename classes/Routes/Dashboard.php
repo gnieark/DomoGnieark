@@ -6,14 +6,13 @@ Class Dashboard extends Route
     static public function get_content_html(PDO $db, User $user)
     {
         //get Devices List
-        $content = new XmlElement("section");
+        $content = "";
         foreach (DevicesManager::get_devices_objects($db, $user) as $device){
-            $content->addChild( $device->get_snippet_as_XMLelement());
+            $content .= $device->get_snippet();
            
         }
 
-        return $content->__toString();
-    }
+        return $content;
 
 
 }
