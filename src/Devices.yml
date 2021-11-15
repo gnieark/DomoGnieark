@@ -1,5 +1,40 @@
 ---
 categories:
+  OneActionHTTP:
+    display_name: "Devices with only one action (and a status)"
+    models:
+      HackerspaceDoor:
+        display_name: "La porte du Hackerspace VentresMous"
+        PHPClass: "Devices_one_action_hackerspace_door"
+        needed-to-configure:
+          device_ip:
+            display_name: IP or FQDN
+            type: string
+          device_port:
+            display_name: Port
+            type: int
+            min: 1
+            max: 65535
+            default: 443
+          device_scheme:
+            display_name: Scheme
+            type: enum
+            enum:
+            - http
+            - https
+            default: https
+          SSLkey:
+            display_name: Key for httpS authentification
+            type: string
+          CAINFO:
+            display_name: CA info The --cacert option
+            type: string
+          SSLCERT:
+            display_name: "SSLCERT: --cert option"
+            type: string
+          SSLCERTPASSWD:
+            display_name: "SSLCERTPASSWD"
+            type: string
   SwitchesHTTP:
     display_name: "Switches connected via an http API"
     models:

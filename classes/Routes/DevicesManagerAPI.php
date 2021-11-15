@@ -29,7 +29,6 @@ class DevicesManagerAPI extends Route{
         if( isset( $devicesSRC["categories"][$category] ) ){
             $models = array();
             foreach( $devicesSRC["categories"][$category]["models"] as $modelName => $model ){
-              
                 $models[] = array(
                     "name" => htmlentities($modelName),
                     "display_name" => htmlentities($model["display_name"])

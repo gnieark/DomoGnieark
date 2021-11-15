@@ -21,13 +21,15 @@ class DevicesManager extends Route{
         ));
         $devicesSRC = self::get_devicesSRC();
         foreach( $devicesSRC["categories"] as $catName => $cat ){
+            
             $tplCatDevices = new TplBlock("catDevices");
             $tplCatDevices->addVars(array(
                 "value"     => $catName,
                 "caption"   => $cat["display_name"]
             ));
+            $tpl->addSubBlock($tplCatDevices);
         }
-        $tpl->addSubBlock($tplCatDevices);
+        
 
 
         $devicesList = DataList_devices::GET($db, $user);
