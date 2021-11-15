@@ -13,6 +13,7 @@ Class Dashboard extends Route
         }
 
         return $content;
+    }
 
 
 }
