@@ -59,15 +59,6 @@ class Devices_Switchs_Sonoff_MiniR2_DIYMode extends Devices_Switchs
         return $result;
 
     }
-    public function get_snippet_as_XMLelement()
-    {
-        $c = new XmlElement( $this->containerHtmlType );
-        $title = new xmlElement ("h3");
-        $title->setContent($this->name);
-        $c->addChild($title);
-
-        return $c;
-    }
 
     public function Off()
     {

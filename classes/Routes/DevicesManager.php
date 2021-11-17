@@ -197,7 +197,7 @@ class DevicesManager extends Route{
     }
     static public function get_custom_css(PDO $db, User $user)
     {
-        return "<style>\n" . file_get_contents("../templates/DevicesManager.css") . "\n</style>";
+        return "<style type=\"text/css\">\n" . file_get_contents("../templates/DevicesManager.css") . "\n</style>";
     }
 
 }

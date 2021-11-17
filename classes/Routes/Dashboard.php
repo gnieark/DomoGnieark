@@ -14,6 +14,9 @@ Class Dashboard extends Route
 
         return $content;
     }
-
+    static public function get_custom_css(PDO $db, User $user)
+    {
+        return "<style type=\"text/css\">\n" . file_get_contents("../templates/dashboard.css") . "\n</style>";
+    }
 
 }
