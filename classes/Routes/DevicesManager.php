@@ -44,9 +44,32 @@ class DevicesManager extends Route{
             foreach( $configs as $key => $value)
             {
                 $tplConf = new TplBlock("customconfig");
+                if( isset($devicesSRC["categories"]
+                                     [ $device["category_name"] ]
+                                     ["models"]
+                                     [ $device["model_name"] ]
+                                     ["needed-to-configure"]
+                                     [$key]
+                                     ["dont_show"]
+                )){
+                    
+                    $dontShow = $devicesSRC["categories"]
+                                            [ $device["category_name"] ]
+                                            ["models"]
+                                            [ $device["model_name"] ]
+                                            ["needed-to-configure"]
+                                            [$key]
+                                            ["dont_show"];
+                }else{
+                    $dontShow = false;
+                }
+
+                    
+                
+
                 $tplConf->addVars(array(
                     "key"   => $key,
-                    "value" => $value
+                    "value" => ($dontShow && !empty($value))? "*****" : $value
                 ));
                 $tplDevice->addSubBlock($tplConf);
             }
@@ -71,6 +94,7 @@ class DevicesManager extends Route{
     *   Construct the good object for each devices
     *   return an array of devices objects
     *
+    * 
     */
     static public function get_devices_objects(PDO $db, User $user)
     {
@@ -118,7 +142,7 @@ class DevicesManager extends Route{
         }
         //test model, create it if needed
 
-        $filtersModel = array( "name"   => $model, "category_id"    => $cat_id);
+        $filtersModels = array( "name"   => $modelName, "category_id"    => $cat_id);
         $models = DataList_devices_models::GET($db, $user, false, $filtersModels);
         if( empty($models) ){
             if(!isset($devicesSRC["categories"][$catName]["models"][$modelName])){
@@ -145,6 +169,7 @@ class DevicesManager extends Route{
 
                 $neededToConfigure = $devicesSRC["categories"][$_POST["addDeviceCat"]]["models"][$_POST["addDeviceModel"]]["needed-to-configure"];
                 $configuration = array();
+                
                 foreach( array_keys( $neededToConfigure ) as $keyToConfigure)
                 {
                     $configuration[ $keyToConfigure ] = $_POST[ $keyToConfigure ];
