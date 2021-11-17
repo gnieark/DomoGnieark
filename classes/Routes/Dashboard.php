@@ -18,5 +18,9 @@ Class Dashboard extends Route
     {
         return "<style type=\"text/css\">\n" . file_get_contents("../templates/dashboard.css") . "\n</style>";
     }
+    static public function get_custom_js()
+    {
+        return "<script>\n" . file_get_contents("../templates/dashboard.js") . "\n</script>";
+    }
 
 }

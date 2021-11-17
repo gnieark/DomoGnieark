@@ -13,6 +13,7 @@ class Devices_Switchs extends Devices {
         $img = new XmlElement("img");
         
         $img->addAttribute( new XmlElementAttribute("src","/imgs/switch-unknow.svg") )
+            ->addAttribute( new XmlElementAttribute("class","switchButton") )
             ->addAttribute( new XmlElementAttribute("alt","switch status unknowed") );
 
         $container  ->addAttribute( new XmlElementAttribute("class",$class) )
