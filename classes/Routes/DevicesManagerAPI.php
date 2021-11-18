@@ -18,8 +18,15 @@ class DevicesManagerAPI extends Route{
         }
         elseif( preg_match("/^\/DevicesManagerAPI\/device\/([a-zA-Z0-9_]*)\/status/", $_SERVER['REQUEST_URI'], $matches )  )
         {
+           
+            $deviceObj = DevicesManager::get_device_object_by_id($db, $user, $matches[1]);
+            if($deviceObj === false ){
+                self::send_404_json_style();
+                die();
+            }
             header('Content-Type: application/json; charset=utf-8');
-            echo json_encode($matches);
+            echo json_encode( $deviceObj->get_status() , true );
+
         }
         else
         {

@@ -108,6 +108,7 @@ class DevicesManager extends Route{
     static public function get_device_object_by_id(PDO $db, User $user, $id)
     {
         $devicesList = DataList_devices::GET($db, $user,array("id" => $id));
+        if(empty($devicesList)){ return false; }
         return self::get_device_object_by_data($devicesList[0]);
     }
     static private function get_device_object_by_data($deviceData)

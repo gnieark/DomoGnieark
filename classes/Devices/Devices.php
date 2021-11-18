@@ -27,7 +27,10 @@ class Devices {
 
         
     }
-
+    public function get_status()
+    {
+        return "unsetted";
+    }
     public function get_snippet_as_XMLelement()
     {
         $container = new XmlElement( $this->containerHtmlType );
