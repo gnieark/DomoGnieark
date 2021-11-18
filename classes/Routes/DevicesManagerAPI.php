@@ -16,6 +16,11 @@ class DevicesManagerAPI extends Route{
         {
             self::send_json_needed_to_configure($matches[1],$matches[2]);
         }
+        elseif( preg_match("/^\/DevicesManagerAPI\/device\/([a-zA-Z0-9_]*)\/status/", $_SERVER['REQUEST_URI'], $matches )  )
+        {
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode($matches);
+        }
         else
         {
             self::send_404_json_style();

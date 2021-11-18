@@ -99,20 +99,25 @@ class DevicesManager extends Route{
     static public function get_devices_objects(PDO $db, User $user)
     {
         $devicesObjects = array();
-
         $devicesList = DataList_devices::GET($db, $user);
-        
         foreach($devicesList as $deviceData){
-            $phpClass = self::get_device_class($deviceData["category_name"],$deviceData["model_name"] );
-            $params = json_decode( $deviceData["configuration"],true );
-            $params["device_id"] = $deviceData["id"];
-            $params["device_name"] =   $deviceData["display_name"];
-            $devicesObjects[$deviceData["id"]] = new $phpClass($params);
+            $devicesObjects[$deviceData["id"]] = self::get_device_object_by_data($deviceData);
         }
-
         return $devicesObjects;
     }
-
+    static public function get_device_object_by_id(PDO $db, User $user, $id)
+    {
+        $devicesList = DataList_devices::GET($db, $user,array("id" => $id));
+        return self::get_device_object_by_data($devicesList[0]);
+    }
+    static private function get_device_object_by_data($deviceData)
+    {
+        $phpClass = self::get_device_class($deviceData["category_name"],$deviceData["model_name"] );
+        $params = json_decode( $deviceData["configuration"],true );
+        $params["device_id"] = $deviceData["id"];
+        $params["device_name"] =   $deviceData["display_name"];
+        return new $phpClass($params);
+    }
     /*
     * Return the id of a device model. Create it on database if is defined on devices.yaml 
     * but not on the models table
