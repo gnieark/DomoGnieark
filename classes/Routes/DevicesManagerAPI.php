@@ -40,9 +40,28 @@ class DevicesManagerAPI extends Route{
             $inputData = json_decode(file_get_contents('php://input'), true);
             if(!isset($inputData["status"]) || !in_array($inputData["status"], array("on","off","turn")) ){
                 self::send_400_json_style("Request must have a JSON formatted body, containing a status field. Available values are 'on', 'off' and 'turn'");
-
             }
-                
+
+            $deviceObj = DevicesManager::get_device_object_by_id($db, $user, $matches[1]);
+
+            if($inputData["status"] == "turn")
+            {
+                if( $deviceObj->get_status()["status"] == "on" ){
+                    $targetStatus = "off";
+                }else{
+                    $targetStatus = "On";
+                }
+            }else{
+                $targetStatus = $inputData["status"];
+            }
+            header('Content-Type: application/json; charset=utf-8');
+            if($deviceObj->makeRequest($targetStatus )){
+                echo '{"error":0}';
+            }else{
+                echo '{"error":0}';
+            }
+
+
             die();
         }
 
@@ -93,5 +112,4 @@ class DevicesManagerAPI extends Route{
         )));
 
     }
-}
 }

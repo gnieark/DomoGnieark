@@ -67,11 +67,19 @@ class Devices_Switchs_Sonoff_MiniR2_DIYMode extends Devices_Switchs
             }
         //could by usefull later:
          $this->device_own_id = $response["data"]["deviceid"];
+
          return array("status"   => $response["data"]["switch"]
                     ,"error"    => 0
                     );
 
 
+    }
+    public function get_device_own_id()
+    {
+        if(empty($this->device_own_id)){
+            $this->get_status();
+        }
+        return $this->device_own_id;
     }
     public function set_device_ip($ip)
     {
@@ -92,13 +100,15 @@ class Devices_Switchs_Sonoff_MiniR2_DIYMode extends Devices_Switchs
     {
         $this->load_params($params);
     }
-    private function makeRequest($on)
+    public function makeRequest($targetStatus)
     {
-        $url = ($this->is_Scheme_HTTPS ? "https://" : "http://") . $this->device_ip . "/zeroconf/switch";
+        $url = ($this->is_Scheme_HTTPS ? "https://" : "http://") . $this->device_ip .  ":" . $this->device_port ."/zeroconf/switch";
+     
+
         $data = array(
-            "deviceid"  => $this->device_id,
+            "deviceid"  => $this->get_device_own_id(),
             "data"  => array(
-                "switch"    => ($on? "on": "off")
+                "switch"    => $targetStatus
             )
 
         );
@@ -106,7 +116,7 @@ class Devices_Switchs_Sonoff_MiniR2_DIYMode extends Devices_Switchs
         $data_string = json_encode($data);
         $ch=curl_init($url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, array("customer"=>$data_string));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
         curl_setopt($ch, CURLOPT_HEADER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER,
             array(
@@ -117,17 +127,26 @@ class Devices_Switchs_Sonoff_MiniR2_DIYMode extends Devices_Switchs
         
         $result = curl_exec($ch);
         curl_close($ch);
-        return $result;
+        if(!$response = json_decode($result, true)){
+            return false;
+        }
+        if(!isset($response["error"])){
+            return false;
+        }
+        if($response["error"] <> 0){
+            return false;
+        }
+        return true;
 
     }
 
     public function Off()
     {
-        return $this->makeRequest(false);
+        return $this->makeRequest("Off");
     }
     public function On()
     {
-        return $this->makeRequest(true);
+        return $this->makeRequest("On");
     }
 
 }
