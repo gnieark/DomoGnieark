@@ -34,7 +34,19 @@ class DevicesManagerAPI extends Route{
         }
         
     }
+    static public function apply_post(PDO $db, User $user)
+    {
+        if(preg_match("/^\/DevicesManagerAPI\/device\/([a-zA-Z0-9_]*)$/",  $_SERVER['REQUEST_URI'] , $matches)){
+            $inputData = json_decode(file_get_contents('php://input'), true);
+            if(!isset($inputData["status"]) || !in_array($inputData["status"], array("on","off","turn")) ){
+                self::send_400_json_style("Request must have a JSON formatted body, containing a status field. Available values are 'on', 'off' and 'turn'");
 
+            }
+                
+            die();
+        }
+
+    }
     static private function send_json_models_list($category)
     {
         $devicesSRC = yaml_parse( file_get_contents("../src/Devices.yml") );
@@ -72,4 +84,14 @@ class DevicesManagerAPI extends Route{
         )));
 
     }
+    static private function send_400_json_style($customMessage = ""){
+        header("HTTP/1.1 400 Bad Request");
+        header('Content-Type: application/json; charset=utf-8');
+        echo (json_encode(array(
+            "code" => 400,
+            "message" => $customMessage  == "" ? "Bad Request" : $customMessage 
+        )));
+
+    }
+}
 }

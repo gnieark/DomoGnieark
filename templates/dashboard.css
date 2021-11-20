@@ -1,3 +1,4 @@
 .deviceSnippet img{
     max-width: 10em;
+    cursor: pointer;
 }
