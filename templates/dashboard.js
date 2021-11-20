@@ -19,16 +19,22 @@ function updateSwitchStatus(img){
                 img.src = "/imgs/switch-on.svg";
                 img.alt = "light is on";
                 img.addEventListener('click', turnOff);
+                img.removeEventListener('click', turnOn);
+                img.removeEventListener('click', turn);
                 break;
             case "off":
                 img.src  = "/imgs/switch-off.svg";
                 img.alt = "light is off";
                 img.addEventListener('click', turnOn);
+                img.removeEventListener('click', turnOff);
+                img.removeEventListener('click', turn);
                 break;
             default:
                 img.src  = "/imgs/switch-unknow.svg";
                 img.alt = "light status is unknowed";
                 img.addEventListener('click', turn);
+                img.removeEventListener('click', turnOn);
+                img.removeEventListener('click', turnOff);
                 break;
 
         }     

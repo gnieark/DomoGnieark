@@ -49,7 +49,7 @@ class DevicesManagerAPI extends Route{
                 if( $deviceObj->get_status()["status"] == "on" ){
                     $targetStatus = "off";
                 }else{
-                    $targetStatus = "On";
+                    $targetStatus = "on";
                 }
             }else{
                 $targetStatus = $inputData["status"];
