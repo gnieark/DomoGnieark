@@ -38,8 +38,6 @@ function updateSwitchStatus(img){
                 break;
 
         }     
-        console.log(data);
-
     });
 }
 function turnOff(e){
