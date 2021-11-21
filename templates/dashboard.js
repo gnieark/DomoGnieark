@@ -60,5 +60,11 @@ function sendturnRequest(deviceId, onOffTurn)
                   ,'Content-Type': 'application/json'
                   }
         ,body: JSON.stringify({"status": onOffTurn})
+        })
+        .then (response => response.json())
+        .then ( data => { 
+           if(data["error"] !== 0){
+               alert ("An error has occured");
+           } 
         });
 }

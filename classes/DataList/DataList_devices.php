@@ -36,7 +36,6 @@ class DataList_Devices extends DataList
 
     public static function GET($db, User $user = null, $activesOnly = false, $filters = null)
     {
-
         $tbl = static::$table;
         $tblCategories = DataList_devices_categories::get_table_name();
         $tblModels = DataList_devices_models::get_table_name();
@@ -71,7 +70,6 @@ class DataList_Devices extends DataList
                 AND $tblModels.category_id = $tblCategories.id
                 ". ($activesOnly? "AND $tbl.active='1'" : "")
                 .self::generate_sql_clauses_from_filter_arr($filters);
-        //echo $sql;
         $rs = $db->prepare($sql);
         $rs->execute(self::generate_dbo_array_from_filter_arr($filters));
         return $rs->fetchAll(PDO::FETCH_ASSOC);

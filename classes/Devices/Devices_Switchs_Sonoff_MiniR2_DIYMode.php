@@ -115,14 +115,16 @@ class Devices_Switchs_Sonoff_MiniR2_DIYMode extends Devices_Switchs
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-        curl_setopt($ch, CURLOPT_HEADER, true);
+        curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_HTTPHEADER,
             array(
                 'Content-Type:application/json',
                 'Content-Length: ' . strlen( $data_string )
             )
         );
+
         $result = curl_exec($ch);
+ 
         if(!$response = json_decode($result, true)){
             return false;
         }
