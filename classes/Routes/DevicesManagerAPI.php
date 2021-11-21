@@ -55,10 +55,10 @@ class DevicesManagerAPI extends Route{
                 $targetStatus = $inputData["status"];
             }
             header('Content-Type: application/json; charset=utf-8');
-            if($deviceObj->makeRequest($targetStatus )){
+            if( $deviceObj->makeRequest( $targetStatus )){
                 echo '{"error":0}';
             }else{
-                echo '{"error":0}';
+                echo '{"error":1}';
             }
 
 
