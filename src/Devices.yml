@@ -1,32 +1,36 @@
 ---
 categories:
-  Tasmota:
-    display_name: Devices with Tasmota firmware
-    models: 
-      DS18x20TemperatureSensor:
-        display_name: DS18x20 temperature sensor
-        PHPClass: TasmotaTemperatureSensor
+  mqtt:
+    display_name: mqtt
+    models:
+      mqttServer: "mqtt gateway with LAN interface"
+        PHPClass: "DevicesMqttServer"
         needed-to-configure:
           device_ip:
             display_name: IP or FQDN
             type: string
-          device_port:
+            default: localhost
+          port:
             display_name: Port
             type: int
             min: 1
             max: 65535
-            default: 443
-          device_scheme:
-            display_name: Scheme
-            type: enum
-            enum:
-            - http
-            - https
-            default: https
-          device_password:
-            display_name: "Device Web access password"
+            default: 1883
+          client_id:
+            display_name: client_id
+            type: string
+            delault: domognieark
+          username:
+            display_name: username (let empty if no authentification needed)
+            type: string
+          password:
+            display_name: password
             type: string
             dont_show: true
+          
+
+            
+
   OneActionHTTP:
     display_name: "Devices with only one action (and a status)"
     models:
