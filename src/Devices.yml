@@ -27,10 +27,6 @@ categories:
             display_name: password
             type: string
             dont_show: true
-          
-
-            
-
   OneActionHTTP:
     display_name: "Devices with only one action (and a status)"
     models:
