@@ -1,0 +1,3 @@
+[submodule "classes/MqttClient"]
+	path = classes/MqttClient
+	url = https://github.com/php-mqtt/client.git
