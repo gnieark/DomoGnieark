@@ -8,6 +8,7 @@ spl_autoload_register(function ($class_name) {
                             ,"../classes/Routes/"
                             ,"../classes/Menus/"
                             ,"../classes/User/"
+                            ,"../classes/phpMQTT/"
                             );
     foreach($classFolders as $folder)
     {
