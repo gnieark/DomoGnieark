@@ -1,3 +1,6 @@
 [submodule "classes/MqttClient"]
 	path = classes/MqttClient
 	url = https://github.com/php-mqtt/client.git
+[submodule "classes/phpMQTT"]
+	path = classes/phpMQTT
+	url = https://github.com/bluerhinos/phpMQTT.git
