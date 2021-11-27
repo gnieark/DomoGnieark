@@ -79,14 +79,14 @@ categories:
             max: 65535
             default: 1883
           client_id:
-            display_name: client_id
+            display_name: client_id (Unique identifier, don't connect others devices to the mqtt broker with the same device_id)
             type: string
             default: domognieark
           username:
             display_name: username (let empty if no authentification needed)
             type: string
           password:
-            display_name: password
+            display_name: password (let empty if no authentification needed)
             type: string
             dont_show: true
           CA:
