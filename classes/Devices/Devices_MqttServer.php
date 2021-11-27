@@ -31,18 +31,11 @@ class Devices_MqttServer extends Devices
     public function get_snippet_as_XMLelement()
     {
         $container = new XmlElement( $this->containerHtmlType );
+        $title = new XmlElement("h3");
+        $title->setContent($this->get_device_name());
+        $container->addChild($title);
         $message = new XmlElement('p');
-
-
-
-
         $message->setContent('Mqtt broker ' . ($this->mqttConnected? 'connected' : 'not available') ) ;
-        //var_dump($this->phpMQTT);
-
-
-
-
-
         $container->addChild($message);
         return $container;
     }
