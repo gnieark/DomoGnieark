@@ -92,3 +92,18 @@ categories:
           CA:
             display_name: CA (let empty if not needed)
             type: string
+      tasmotaTemperatureSensor:
+        display_name: "Tasmota temperature sensor (DHT11 or DS18x20)"
+        PHPClass: Devices_Tasmota_temperature_Sensor
+        mqttServer_needed: true
+        autoDiscoverMethod: true
+        needed-to-configure:
+          topic:
+            display_name: Topic (usualy "tasmota_DEVICEID" one of mines is tasmota_0938E8)
+            type: string
+          fullTopic:
+            display_name: Full Topic
+            type: string
+          
+
+
