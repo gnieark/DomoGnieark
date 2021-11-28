@@ -107,12 +107,13 @@ function changeModel(e)
     if ( (selectedModel == -1) || (selectedModel == '') ){
         return false;
     } 
-    fetch("/DevicesManagerAPI/category/" +  selectedCat + "/model/" + selectedModel + "/needed-to-configure")
+    
+    fetch("/DevicesManagerAPI/category/" +  selectedCat + "/model/" + selectedModel)
     .then (response => response.json())
     .then ( data => { 
-        for (var k in data){
-            if (typeof data[k] !== 'function') {
-                customAwnsersContainer.appendChild(createInputLine(k,data[k]));
+        for (var k in data["needed-to-configure"]){
+            if (typeof data["needed-to-configure"][k] !== 'function') {
+                customAwnsersContainer.appendChild(createInputLine(k,data["needed-to-configure"][k]));
             }
         }
     });

@@ -16,6 +16,10 @@ class DevicesManagerAPI extends Route{
         {
             self::send_json_needed_to_configure($matches[1],$matches[2]);
         }
+        elseif( preg_match("/^\/DevicesManagerAPI\/category\/([a-zA-Z0-9_]*)\/model\/([a-zA-Z0-9_]*)$/", $_SERVER['REQUEST_URI'], $matches ) )
+        {
+            self::send_json_model($matches[1],$matches[2]);
+        }
         elseif( preg_match("/^\/DevicesManagerAPI\/device\/([a-zA-Z0-9_]*)\/status/", $_SERVER['REQUEST_URI'], $matches )  )
         {
            
@@ -74,10 +78,24 @@ class DevicesManagerAPI extends Route{
         if( isset( $devicesSRC["categories"][$category] ) ){
             $models = array();
             foreach( $devicesSRC["categories"][$category]["models"] as $modelName => $model ){
-                $models[] = array(
-                    "name" => htmlentities($modelName),
-                    "display_name" => htmlentities($model["display_name"])
-                );
+
+                if(isset($model["mqttServer_needed"]) && $model["mqttServer_needed"]){
+                    $mqttServer_needed = true;
+                }else{
+                    $mqttServer_needed = false;
+                }
+
+                if( isset($model["autoDiscoverMethod"]) &&  $model["autoDiscoverMethod"] ){
+                    $autoDiscoverMethod = true;
+                }else{
+                    $autoDiscoverMethod = false;
+                }
+
+                $models[] = array("name" => htmlentities($modelName)
+                                  ,"display_name" => htmlentities($model["display_name"])
+                                  ,"mqttServer_needed" => $mqttServer_needed
+                                  ,"autoDiscoverMethod" => $autoDiscoverMethod
+                                  );
             }
             header('Content-Type: application/json; charset=utf-8');
             echo json_encode($models);
@@ -95,7 +113,18 @@ class DevicesManagerAPI extends Route{
             self::send_404_json_style("Model and / or category not found");
         }
     }
+    static private function send_json_model($category,$model){
+        $devicesSRC = yaml_parse( file_get_contents("../src/Devices.yml") );
+        if(isset($devicesSRC["categories"][$category]["models"][$model] )){
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode($devicesSRC["categories"][$category]["models"][$model], true  );
+        }else{
+            self::send_404_json_style("Model and / or category not found");
+        }
+    }
 
+
+    
     static private function send_404_json_style($customMessage = ""){
         header("HTTP/1.1 404 Not Found");
         header('Content-Type: application/json; charset=utf-8');
