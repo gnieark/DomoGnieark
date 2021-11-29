@@ -16,6 +16,10 @@ class DevicesManagerAPI extends Route{
         {
             self::send_json_needed_to_configure($matches[1],$matches[2]);
         }
+        elseif( preg_match("/^\/DevicesManagerAPI\/category\/([a-zA-Z0-9_]*)\/model\/([a-zA-Z0-9_]*)\/devices/", $_SERVER['REQUEST_URI'], $matches ) )
+        {
+            self::send_json_list_of_devices_for_a_model($db,$user,$matches[1],$matches[2]);
+        }
         elseif( preg_match("/^\/DevicesManagerAPI\/category\/([a-zA-Z0-9_]*)\/model\/([a-zA-Z0-9_]*)$/", $_SERVER['REQUEST_URI'], $matches ) )
         {
             self::send_json_model($matches[1],$matches[2]);
@@ -84,7 +88,6 @@ class DevicesManagerAPI extends Route{
                 }else{
                     $mqttServer_needed = false;
                 }
-
                 if( isset($model["autoDiscoverMethod"]) &&  $model["autoDiscoverMethod"] ){
                     $autoDiscoverMethod = true;
                 }else{
@@ -103,6 +106,26 @@ class DevicesManagerAPI extends Route{
             self::send_404_json_style();
         }
     }
+
+    static private function send_json_list_of_devices_for_a_model( PDO $db, User $user, $category,$model){
+ 
+        $model_id = DevicesManager::get_device_model_id_by_name( $db, $user, $category, $model );
+        $filters = array( "model_id"   => $model_id);
+        $devicesList = DataList_devices::GET($db, $user, false, $filters);
+        $ret = array();
+        foreach( $devicesList as $deviceData )
+        {
+            $ret[] = array(
+                "id"  => $deviceData["id"],
+                "display_name"  => $deviceData["display_name"]
+            );
+
+        }
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($ret);
+
+    }
+
     static private function send_json_needed_to_configure($category,$model){
         $devicesSRC = yaml_parse( file_get_contents("../src/Devices.yml") );
         if(isset($devicesSRC["categories"][$category]["models"][$model] )){

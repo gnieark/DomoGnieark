@@ -125,7 +125,7 @@ class DevicesManager extends Route{
     * Return the id of a device model. Create it on database if is defined on devices.yaml 
     * but not on the models table
     */
-    static private function get_device_model_id_by_name(PDO $db, User $user, string $catName, string $modelName)
+    static public function get_device_model_id_by_name(PDO $db, User $user, string $catName, string $modelName)
     {
         $devicesSRC = self::get_devicesSRC();
 
