@@ -5,6 +5,8 @@ A WEB UI and an API to manage some home automation equipment. Work in progress.
 # Installation
 (to test, or to contribute because, it's not working yet.)
 
+PHP 7 with php-mosquitto https://mosquitto-php.readthedocs.io/en/latest/
+
 * All requests are computed by public/index.php . Look at the sample doc/nginxSample.conf (The same as a symphony framework one)
 * The file config/config.php must contain database settings
 ```php

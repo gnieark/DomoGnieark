@@ -39,5 +39,30 @@ class Devices_MqttServer extends Devices
         $container->addChild($message);
         return $container;
     }
+    static public function procMsg($topic, $msg){
+		echo 'Msg Recieved: ' . date('r') . "\n";
+		echo "Topic: {$topic}\n\n";
+		echo "\t$msg\n\n";
+    }
+
+    public function findDevices()
+    {
+        
+        if(!$this->mqttConnected === false)
+        {
+            //testing
+            echo "hey";
+            $topics['#'] = array('qos' => 0,'function' => 'Devices_MqttServer::procMsg');
+            $this->phpMQTT->subscribe($topics, 0);
+            //while($this->phpMQTT->proc()) {
+
+            //}
+            
+            $this->phpMQTT->close();
+            
+            die();
+        }
+
+    }
 
 }

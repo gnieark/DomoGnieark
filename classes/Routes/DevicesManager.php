@@ -105,6 +105,16 @@ class DevicesManager extends Route{
         }
         return $devicesObjects;
     }
+    static public function get_devices_objects_by_model(PDO $db, User $user, string $category, string $model)
+    {
+        $model_id = self::get_device_model_id_by_name($db, $user, $category, $model);
+        $devicesObjects = array();
+        $devicesList = DataList_devices::GET($db, $user, false, array( "model_id"  => $model_id ) );
+        foreach($devicesList as $deviceData){
+            $devicesObjects[$deviceData["id"]] = self::get_device_object_by_data($deviceData);
+        }
+        return $devicesObjects;
+    }
     static public function get_device_object_by_id(PDO $db, User $user, $id)
     {
         $filters = array( "id" => $id);

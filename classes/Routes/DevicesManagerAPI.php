@@ -36,6 +36,16 @@ class DevicesManagerAPI extends Route{
             echo json_encode( $deviceObj->get_status() , true );
 
         }
+        elseif( preg_match( "/^\/DevicesManagerAPI\/AutoDiscover-mqtt$/" , $_SERVER['REQUEST_URI'] ) ){
+            //lister les devices de type mttserver
+            //$mqttServers = DevicesManager::
+            $mqttServers = DevicesManager::get_devices_objects_by_model($db, $user, "mqtt", "mqttServer");
+            foreach($mqttServers as $mqttServer){
+                //test it
+                $mqttServer->findDevices(); 
+            }
+            die();
+        }
         else
         {
             self::send_404_json_style();

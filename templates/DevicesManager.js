@@ -112,47 +112,64 @@ function changeModel(e)
     .then ( data => { 
         let mqttServer_needed = false;
         if( typeof data.mqttServer_needed !== 'undefined' ){
-            if ( data.mqttServer_needed == true)
-            {
+            if ( data.mqttServer_needed == true){
                 mqttServer_needed = true;
             }  
         }
 
         let autoDiscoverMethod = false;
         if( typeof data.autoDiscoverMethod !== 'undefined' ){
-            if( data.autoDiscoverMethod == true )
-            {
+            if( data.autoDiscoverMethod == true ){
                 autoDiscoverMethod = true;
             }  
         }
 
         if(mqttServer_needed)
         {
+            let p = createElem("p",{});
+            let label = createElem("label",{});
+            label.innerHTML = "Choose a mqtt server";
+            p.appendChild(label);
+            let select = createElem("select",{"name":"mqttserver_id", "id" : "mqttserver_id"});
+            p.appendChild(select);
+            customAwnsersContainer.appendChild(p);
+
             //add a select with configured mqqt servers
             fetch("/DevicesManagerAPI/category/mqtt/model/mqttServer/devices")
             .then (response => response.json())
             .then ( devices => {
-                let p = createElem("p",{});
-                let label = createElem("label",{});
-                label.innerHTML = "Choose a mqtt server";
-                p.appendChild(label);
-                let select = createElem("select",{"name":"mqttserver_id"});
-
                 for( var k in devices ){
                     let opt = document.createElement("option");
                     opt.value = devices[k]["id"];
                     opt.text = devices[k]["display_name"];
-                    select.appendChild(opt);
+                    document.getElementById("mqttserver_id").appendChild(opt);
                 }
-                p.appendChild(select);
-                customAwnsersContainer.appendChild(p);
+
             });
         }
+        if(autoDiscoverMethod)
+        {
+            //make two tabs (one for autodiscover and the normal config)
+            let autodiscoverContainer = createElem("article", {"class" : "autodiscover"});
+            let autoDiscoverTitle = createElem("h4",{});
+            autoDiscoverTitle.innerHTML = "Autodiscover Method";
+            autodiscoverContainer.appendChild(autoDiscoverTitle);
+            fetch("/DevicesManagerAPI/AutoDiscover-mqtt")
+            .then (response => response.json())
+            .then ( devices => {
+                for( var k in devices ){
 
+                }
+
+            });
+            //deviceCustomAwnswers
+            document.getElementById("deviceCustomAwnswers").parentNode.insertBefore(autodiscoverContainer,document.getElementById("deviceCustomAwnswers"));
+        }
         for (var k in data["needed-to-configure"]){
             if (typeof data["needed-to-configure"][k] !== 'function') {
                 customAwnsersContainer.appendChild(createInputLine(k,data["needed-to-configure"][k]));
             }
         }
+
     });
 }
