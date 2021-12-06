@@ -1,8 +1,5 @@
 <?php
 
-//because of namespace, not autoloadable:
-require("../classes/phpMQTT/phpMQTT.php");
-
 //autoload classes
 spl_autoload_register(function ($class_name) {
     $classFolders = array   ("../classes/"
